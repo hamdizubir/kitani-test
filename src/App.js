@@ -105,7 +105,7 @@ function App() {
   // const [apiKey, setApiKey] = React.useState();
   const [products, setProducts] = React.useState();
   const [productsError, setProductsError] = React.useState(false);
-  const [editAmount, setEditAmount] = React.useState(0);
+  const [editAmount, setEditAmount] = React.useState();
   const [isLoading, setIsLoading] = React.useState(false);
   const [isErrorDeduct, setIsErrorDeduct] = React.useState(false);
   const [isShowEditProduct, setIsShowEditProduct] = React.useState({
@@ -136,6 +136,8 @@ function App() {
   };
 
   const handleOkButton = () => () => {
+    setEditAmount(null)
+    setIsErrorDeduct(false);
     setIsShowEditProduct({
       isShow: false,
       isAdd: false,
@@ -195,6 +197,16 @@ function App() {
           ))}
         {isShowEditProduct.isShow && isShowEditProduct.product && (
           <EditProductContainer>
+            <SubmitButton
+              style={{
+                backgroundColor:
+               "skyblue",
+                cursor: "pointer",
+              }}
+              onClick={handleOkButton()}
+            >
+              Back
+            </SubmitButton>
             <h3 style={{ margin: 0, fontWeight: "bold" }}>
               {isShowEditProduct.isAdd ? "Add Stock" : "Deduct Stock"}
             </h3>
@@ -217,15 +229,26 @@ function App() {
                   id="quantity"
                   name="quantity"
                   min="1"
-                  onChange={(e) =>
+                  value={editAmount}
+                  onKeyPress={(event) => {
+                    if (!/[0-9]/.test(event.key)) {
+                      event.preventDefault();
+                    }
+                  }}
+                  onChange={(e) => {
                     handleChangeQuantity(
                       e.target.value,
                       isShowEditProduct.isAdd,
                       isShowEditProduct.product.amount
-                    )
-                  }
+                    );
+                  }}
                 />
               </>
+            )}
+            {editAmount && editAmount <= 0 && (
+              <h5 style={{ margin: 0, fontWeight: "bold", color: "red" }}>
+                edit amount must be greater than zero
+              </h5>
             )}
             {isErrorDeduct && (
               <h5 style={{ margin: 0, fontWeight: "bold", color: "red" }}>
