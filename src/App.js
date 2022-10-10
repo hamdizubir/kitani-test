@@ -85,7 +85,6 @@ const handleSubmit = async (amount, sku_code, isAdd, setSubmitResponse) => {
         },
       }
     );
-    console.log("🚀 ~ file: App.js ~ line 111 ~ handleSubmit ~ res", res);
     return setSubmitResponse({
       code: res.data.code,
       msg: res.data.msg,
