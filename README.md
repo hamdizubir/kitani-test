@@ -1,8 +1,19 @@
+# Developer's Note
+
+I already tried to use a dynamic API key, but the register API returns "The requested URL was not found on the server.".
+So that's why i used a static one.
+
+This is a react web app, to start the project please follow the instruction below
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
+
+Firstly, install all the package by running:
+
+### `npm install`
 
 In the project directory, you can run:
 
